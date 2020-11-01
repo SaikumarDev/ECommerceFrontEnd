@@ -1,0 +1,22 @@
+<form #productForm="ngForm" (ngSubmit)="addProduct(productForm)" >
+    Pid<input
+     type="text"
+      id="pid"
+      name="pid"
+      ngModel
+      > <br><br>
+       name<input
+     type="text"
+      id="name"
+      name="name"
+      ngModel
+      > <br><br>
+      price<input
+     type="text"
+      id="price"
+      name="price"
+      ngModel
+      > <br><br>
+
+      <button>Submit</button>
+</form>
