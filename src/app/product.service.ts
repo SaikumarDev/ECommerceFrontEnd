@@ -15,4 +15,15 @@ export class ProductService {
       return this.http.post("http://localhost:9013/addProduct",product);
    }
 
+   getAllProducts(){
+        return this.http.get("http://localhost:9013/getAllProducts");
+   }
+
+   deleteProduct(pid){
+
+    return this.http.delete("http://localhost:9013/deleteProduct/"+pid);
+
+   }
+
+
 }

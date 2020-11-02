@@ -11,7 +11,37 @@ export class ProductComponent implements OnInit {
   constructor(private prodServ:ProductService) { }
 
   ngOnInit(): void {
+
+    this.prodServ.getAllProducts().subscribe(
+      (response) => {
+            this.products=response;
+      }
+    )
+    
+
   }
+  deleteProduct(productId){
+     console.log('productId',productId);
+
+     this.prodServ.deleteProduct(productId).subscribe(
+       (response) => {
+         this.apiResponse=response;
+         if(this.apiResponse.status){
+          this.prodServ.getAllProducts().subscribe(
+            (response) => {
+                  this.products=response;
+            }
+          )
+          
+         }
+       }
+     )
+ 
+
+  }
+
+  apiResponse;
+  products;
 
   addProduct(data){
 
@@ -25,6 +55,18 @@ export class ProductComponent implements OnInit {
         (response) =>{
 
           console.log(response);
+
+          this.apiResponse= response;
+
+          if(this.apiResponse._id){
+
+              this.prodServ.getAllProducts().subscribe(
+                (response) => {
+                      this.products=response;
+                }
+              )
+
+          }
 
         }
 
