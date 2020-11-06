@@ -8,17 +8,24 @@ import { ProductService } from '../product.service';
 })
 export class ProductComponent implements OnInit {
 
+  name;
+  pid;
+  price;
+  ap=true;
+  sp=false;
+
   constructor(private prodServ:ProductService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+     this.getAllProducts();
+  }
 
+  private getAllProducts(){
     this.prodServ.getAllProducts().subscribe(
       (response) => {
             this.products=response;
       }
     )
-    
-
   }
   deleteProduct(productId){
      console.log('productId',productId);
@@ -27,11 +34,7 @@ export class ProductComponent implements OnInit {
        (response) => {
          this.apiResponse=response;
          if(this.apiResponse.status){
-          this.prodServ.getAllProducts().subscribe(
-            (response) => {
-                  this.products=response;
-            }
-          )
+            this.getAllProducts();
           
          }
        }
@@ -49,6 +52,7 @@ export class ProductComponent implements OnInit {
 
     console.log("data",data.value);
 
+      
 
     this.prodServ.addANewProduct(data.value).subscribe(
 
@@ -60,11 +64,9 @@ export class ProductComponent implements OnInit {
 
           if(this.apiResponse._id){
 
-              this.prodServ.getAllProducts().subscribe(
-                (response) => {
-                      this.products=response;
-                }
-              )
+            data.reset();
+
+             this.getAllProducts();
 
           }
 
@@ -73,5 +75,39 @@ export class ProductComponent implements OnInit {
     )
 
   }
+
+   editProduct(product){
+
+     this.name=product.name;
+     this.price=product.price;
+     this.pid=product.pid;
+       this.ap=false;
+       this.sp=true;
+
+   }
+
+   saveProduct(){
+
+     let data={
+       name: this.name,
+       pid:this.pid,
+       price:this.price
+     }
+
+     this.prodServ.updateProduct(data).subscribe(
+       response => {
+         this.apiResponse=response;
+         if(this.apiResponse.status){
+          this.ap=true;
+          this.sp=false;
+          this.name="";
+          this.price="";
+          this.pid="";
+           this.getAllProducts();
+         }
+       }
+     )
+
+   }
 
 }

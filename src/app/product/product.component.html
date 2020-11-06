@@ -10,25 +10,29 @@
 			    <form class="kpx_loginForm" #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
 					<div class="input-group">
 						
-						<input type="text" class="form-control" ngModel name="pid" placeholder="product id">
+						<input type="text" class="form-control" id="pid" [(ngModel)]="pid" name="pid" placeholder="product id">
 					</div>
                     <hr />
 
                     <div class="input-group">
 						
-                      <input type="text" class="form-control" ngModel name="price" placeholder="price">
+                      <input type="text" class="form-control" id="price" [(ngModel)]="price" name="price" placeholder="price">
                     </div>
                               <hr />
 										
 					<div class="input-group">
 					
-						<input  type="text" class="form-control" ngModel name="name" placeholder="name">
+						<input  type="text" class="form-control" id="name" [(ngModel)]="name" name="name" placeholder="name">
           </div>
           
-
                     <hr />
-					<button class="btn btn-lg btn-outline-primary btn-block"><i class="fa fa-sign-in"></i> Add Product</button>
-				</form>
+
+          <button *ngIf="ap" class="btn btn-lg btn-outline-primary btn-block"><i class="fa fa-sign-in"></i> Add Product</button>
+          
+          
+        </form>
+        
+        <button *ngIf="sp" (click)="saveProduct()" class="btn btn-lg btn-outline-primary btn-block"><i class="fa fa-sign-in"></i> Save Product</button>
 			</div>
     	</div>
 		<div class="row kpx_row-sm-offset-3">
@@ -60,7 +64,7 @@
           <td>{{product.name}}</td>
           <td>{{product.price}}</td>
           <td><button (click)="deleteProduct(product.pid)" class="btn btn-danger">Delete</button></td>
-          <td><button class="btn btn-danger">Edit</button></td>
+          <td><button (click)="editProduct(product)" class="btn btn-danger">Edit</button></td>
         </tr>
       </tbody>
     </table>

@@ -16,12 +16,18 @@ export class ProductService {
    }
 
    getAllProducts(){
-        return this.http.get("http://localhost:9013/getAllProducts");
+        return this.http.get("http://localhost:9013/getAllProducts/");
    }
 
    deleteProduct(pid){
 
     return this.http.delete("http://localhost:9013/deleteProduct/"+pid);
+
+   }
+
+   updateProduct(product){
+
+    return this.http.put("http://localhost:9013/updateProduct/"+product.pid,product);
 
    }
 
