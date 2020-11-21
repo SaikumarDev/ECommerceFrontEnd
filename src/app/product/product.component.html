@@ -24,6 +24,13 @@
 					
 						<input  type="text" class="form-control" id="name" [(ngModel)]="name" name="name" placeholder="name">
           </div>
+
+          <div class="input-group">
+            <input class="form-control" type="file" 
+            (change)="onChange($event)"> 
+          </div>
+
+
           
                     <hr />
 

@@ -12,6 +12,8 @@ export class ProductService {
    
    addANewProduct(product){
      // API Call
+     console.log('formData',product);
+    
       return this.http.post("http://localhost:9013/addProduct",product);
    }
 

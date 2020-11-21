@@ -1,2 +1,36 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<!-- <app-navbar></app-navbar>
+<router-outlet></router-outlet> -->
+<!-- 
+<h1>Reactive Forms </h1>
+
+<form [formGroup]="loginForm">
+
+     Username<input type="text" formControlName="username">
+     
+        <div *ngIf="username.touched && username.invalid">
+
+            <div *ngIf="username.errors.required">Username required</div>
+            <div *ngIf="username.errors.minlength"> username should have atleast 5 chars </div>
+            <div *ngIf="username.errors.maxlength">Username cannot be more than 10 chars</div>
+            <div *ngIf="username.errors.cannotHaveSpace">Username cannot have space!</div>
+
+        </div>
+
+     <br><br>
+
+     Password <input type="text" formControlName="password"> 
+     
+     <div *ngIf="password.touched && password.invalid">
+
+            <div *ngIf="password.errors.required">Password required</div>
+            <div *ngIf="password.errors.minlength"> Password should have atleast 5 chars </div>
+            
+
+        </div><br><br>
+
+     <button class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+
+
+</form> -->
+
+<app-product></app-product>

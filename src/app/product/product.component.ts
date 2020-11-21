@@ -8,11 +8,21 @@ import { ProductService } from '../product.service';
 })
 export class ProductComponent implements OnInit {
 
+
+
   name;
   pid;
   price;
   ap=true;
   sp=false;
+
+  file: File = null;
+
+  onChange(event) { 
+    this.file = event.target.files[0]; 
+    
+    console.log('file', this.file);
+} 
 
   constructor(private prodServ:ProductService) { }
 
@@ -52,9 +62,25 @@ export class ProductComponent implements OnInit {
 
     console.log("data",data.value);
 
-      
+    console.log("pid",data.value.pid);
 
-    this.prodServ.addANewProduct(data.value).subscribe(
+    console.log('filename', this.file.name);
+
+    let formData = new FormData();  
+        
+    // Store form name as "file" with file data 
+    formData.append("image", this.file, this.file.name); 
+    formData.append('pid',data.value.pid);
+    formData.append('name',data.value.name);
+    formData.append('price',data.value.price);
+
+    // for (var key of formData.entries()) {
+		// 	console.log(key[0] + ', ' + key[1])
+		// }
+
+    console.log('formData in Component', formData);
+
+    this.prodServ.addANewProduct(formData).subscribe(
 
         (response) =>{
 
@@ -69,23 +95,16 @@ export class ProductComponent implements OnInit {
              this.getAllProducts();
 
           }
-
         }
-
     )
-
   }
-
    editProduct(product){
-
      this.name=product.name;
      this.price=product.price;
      this.pid=product.pid;
        this.ap=false;
        this.sp=true;
-
    }
-
    saveProduct(){
 
      let data={
